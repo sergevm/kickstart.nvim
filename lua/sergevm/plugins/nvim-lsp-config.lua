@@ -218,5 +218,7 @@ return { -- LSP Configuration & Plugins
         end,
       },
     }
+
+    require('lspconfig').csharp_ls.setup {}
   end,
 }

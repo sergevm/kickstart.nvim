@@ -28,7 +28,7 @@ return {
       -- list of servers for mason to install
       ensure_installed = {
         'ts_ls',
-        'omnisharp',
+        'csharp_ls',
         'html',
         'cssls',
         'tailwindcss',
@@ -36,7 +36,7 @@ return {
         'lua_ls',
         'graphql',
         'emmet_ls',
-        'csharp_ls',
+        'angularls',
       },
     }
 
