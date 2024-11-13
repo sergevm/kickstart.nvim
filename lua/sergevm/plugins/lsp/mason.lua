@@ -36,6 +36,7 @@ return {
         'lua_ls',
         'graphql',
         'emmet_ls',
+        'bicep_ls',
         'angularls@15.2.0', -- This needs adaptation based on the typescript version in your project
       },
     }
