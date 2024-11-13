@@ -219,6 +219,12 @@ return { -- LSP Configuration & Plugins
       },
     }
 
-    require('lspconfig').csharp_ls.setup {}
+    local lspconfig = require 'lspconfig'
+
+    -- csharp lsp setup
+    lspconfig.csharp_ls.setup {}
+
+    -- Bicep Language Server setup
+    lspconfig.bicep.setup {}
   end,
 }

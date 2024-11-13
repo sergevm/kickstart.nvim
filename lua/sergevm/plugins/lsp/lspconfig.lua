@@ -69,6 +69,8 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
+    local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
+
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
     local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
@@ -154,6 +156,11 @@ return {
           flags = {
             debounce_text_changes = 150,
           },
+        }
+      end,
+      ['bicep'] = function()
+        lspconfig.bicep.setup {
+          cmd = { 'dotnet', bicep_lsp_bin },
         }
       end,
     }
