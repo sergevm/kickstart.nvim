@@ -158,6 +158,8 @@ return {
           },
         }
       end,
+      -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bicep
+      -- https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
       ['bicep'] = function()
         lspconfig.bicep.setup {
           cmd = { 'dotnet', bicep_lsp_bin },
