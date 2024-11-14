@@ -165,6 +165,24 @@ return {
           cmd = { 'dotnet', bicep_lsp_bin },
         }
       end,
+      -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/azure_pipelines_ls.lua
+      ['azure_pipelines_ls'] = function()
+        lspconfig.azure_pipelines_ls.setup {
+          root_dir = lspconfig.util.root_pattern 'azure-pipelines.yml',
+          settings = {
+            yaml = {
+              schemas = {
+                ['https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json'] = {
+                  '/azure-pipeline*.y*l',
+                  '/*.azure*',
+                  'Azure-Pipelines/**/*.y*l',
+                  'Pipelines/*.y*l',
+                },
+              },
+            },
+          },
+        }
+      end,
     }
   end,
 }
