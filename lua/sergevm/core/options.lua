@@ -13,7 +13,14 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
+-- text wrapping
+vim.g.editorconfig = false
 opt.wrap = false
+opt.textwidth = 0 -- Set text width to unlimited
+opt.formatoptions:remove 't' -- No text auto-wrapping
+opt.formatoptions:remove 'c' -- No comment auto-wrapping
+opt.formatoptions:remove 'r' -- Don't auto-continue comments
+opt.formatoptions:remove 'o' -- Don't auto-insert new lines
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -25,7 +32,6 @@ opt.background = 'dark'
 opt.signcolumn = 'yes'
 
 -- opt.backspace = 'indent, eol, start'
-
 opt.splitright = true
 opt.splitbelow = true
 
