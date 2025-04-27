@@ -5,6 +5,12 @@ return {
     local conform = require 'conform'
 
     conform.setup {
+      -- formatters = {
+      --   prettier = {
+      --     command = 'prettier',
+      --     args = { '--config', '.editorconfig' },
+      --   },
+      -- },
       formatters_by_ft = {
         javascript = { 'prettier' },
         typescript = { 'prettier' },
