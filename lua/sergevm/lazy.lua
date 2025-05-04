@@ -21,8 +21,9 @@ require('lazy').setup {
     { import = 'sergevm.plugins' },
     { import = 'sergevm.plugins.lsp' },
   },
-  install = { colorscheme = { 'tokyonight' } },
+  -- install = { colorscheme = { 'catppuccin' } },
   -- automatically check for plugin updates
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
+  colorscheme = 'catppuchin',
 }
