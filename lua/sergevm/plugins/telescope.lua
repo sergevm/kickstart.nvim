@@ -26,6 +26,26 @@ return { -- Fuzzy Finder (files, lsp, etc)
   config = function()
     local telescope = require 'telescope'
     local actions = require 'telescope.actions'
+    local previewers = require 'telescope.previewers'
+
+    -- Custom previewer that skips large or minified files
+    local new_maker = function(filepath, bufnr, opts)
+      opts = opts or {}
+      filepath = vim.fn.expand(filepath)
+
+      -- Skip preview for minified JS files
+      if filepath:match '%.min%.js$' then
+        return
+      end
+
+      -- Use synchronous fs_stat to get file size
+      local stat = vim.loop.fs_stat(filepath)
+      if stat and stat.size > 1000000 then
+        return
+      end
+
+      previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    end
 
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
@@ -54,6 +74,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
+        buffer_previewer_maker = new_maker,
+      },
+      preview = {
+        filesize_limit = 1,
+        timeout = 250,
+        highlight_limit = 1,
+        treesitter = false,
       },
     }
 

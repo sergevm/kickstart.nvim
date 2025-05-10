@@ -9,6 +9,35 @@ return {
     -- import nvim-treesitter plugin
     local treesitter = require 'nvim-treesitter.configs'
 
+    local disable_large_file_features = function(buf)
+      local max_filesize = 1024 * 1024 * 2
+      local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
+
+      if size > max_filesize then
+        vim.b[buf].large_file = true
+        vim.cmd 'syntax off'
+        vim.cmd 'filetype off'
+        pcall(vim.treesitter.stop)
+
+        vim.api.nvim_create_autocmd('LspAttach', {
+          callback = function(args)
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            if client then
+              client.stop()
+            end
+          end,
+          buffer = buf,
+        })
+
+        vim.notify('Large file detected: disabled syntax, LSP, and Treesitter', vim.log.levels.WARN)
+      end
+    end
+
+    vim.api.nvim_create_autocmd('BufReadPre', {
+      callback = function(args)
+        disable_large_file_features(args.buf)
+      end,
+    })
     -- configure treesitter
     treesitter.setup { -- enable syntax highlighting
       highlight = {
