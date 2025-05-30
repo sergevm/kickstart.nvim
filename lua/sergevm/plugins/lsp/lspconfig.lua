@@ -17,6 +17,18 @@ return {
 
     local keymap = vim.keymap -- for conciseness
 
+    -- set up go lsp ...
+    lspconfig.gopls.setup {
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+        },
+      },
+    }
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
@@ -99,6 +111,43 @@ return {
               end,
             })
           end,
+        }
+      end,
+      -- You have to install PowerShellEditorServices manually: download and extract zip to .local/share/powershell
+      ['powershell_es'] = function()
+        local mason_registry = require 'mason-registry'
+
+        lspconfig['powershell_es'].setup {
+          bundle_path = mason_registry.get_package('powershell-editor-services'):get_install_path(),
+          cmd = {
+            'pwsh',
+            '-NoLogo',
+            '-NoProfile',
+            '-Command',
+            vim.fn.expand '~/.local/share/nvim/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1',
+            '-HostName',
+            'nvim',
+            '-Stdio',
+            '-HostProfileId',
+            '0',
+            '-HostVersion',
+            '1.0.0',
+            '-LogPath',
+            vim.fn.stdpath 'cache' .. '/powershell_es.log',
+            '-SessionDetailsPath',
+            vim.fn.stdpath 'cache' .. '/powershell_es.session.json',
+            '-BundledModulesPath',
+            vim.fn.expand '~/.local/share/powershell/Modules',
+            '-LogLevel',
+            'Normal',
+            '-FeatureFlags',
+            '@()',
+          },
+          filetypes = { 'ps1', 'powershell' },
+          shell = 'pwsh',
+          init_options = {
+            enableProfileLoading = false,
+          },
         }
       end,
       ['graphql'] = function()
