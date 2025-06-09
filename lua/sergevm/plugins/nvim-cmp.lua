@@ -49,7 +49,7 @@ return {
         { name = 'buffer' }, -- text within current buffer
         { name = 'path' }, -- file system paths
         { name = 'nvim_lsp' },
-        { name = 'copilot' },
+        { name = 'copilot', priority = 1000 }, -- GitHub Copilot
       },
 
       -- configure lspkind for vs-code like pictograms in completion menu

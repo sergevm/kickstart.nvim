@@ -19,7 +19,7 @@ return {
         auto_trigger = true,
         debounce = 75,
         keymap = {
-          accept = '<C-e>',
+          accept = '<C-CR>',
           next = '<C-n>',
           prev = '<C-p>',
           dismiss = '<C-c>',
@@ -43,7 +43,7 @@ return {
         enabled = true, -- set to false if you enable copilot-cmp.lua
         auto_refresh = true,
         keymap = {
-          accept = '<C-e>',
+          accept = '<C-CR>',
           jump_next = 'C-n',
           jump_prev = 'C-p',
           refresh = 'gr',
