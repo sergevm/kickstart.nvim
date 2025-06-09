@@ -15,7 +15,7 @@ return {
     require('copilot').setup {
 
       suggestion = {
-        enabled = true,
+        enabled = true, -- set to false if you enable copilot-cmp.lua
         auto_trigger = true,
         debounce = 75,
         keymap = {
@@ -40,7 +40,7 @@ return {
       logger = logger,
 
       panel = {
-        enabled = true,
+        enabled = true, -- set to false if you enable copilot-cmp.lua
         auto_refresh = true,
         keymap = {
           accept = '<C-e>',
