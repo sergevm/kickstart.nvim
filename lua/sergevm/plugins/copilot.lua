@@ -15,7 +15,7 @@ return {
     require('copilot').setup {
 
       suggestion = {
-        enabled = false, -- set to false if you enable copilot-cmp.lua
+        enabled = true, -- set to false if you enable copilot-cmp.lua
         auto_trigger = true,
         debounce = 75,
         keymap = {
