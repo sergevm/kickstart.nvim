@@ -23,15 +23,29 @@ return {
         go = { 'gofmt' },
       },
       format_on_save = {
-        lsp_fallback = true,
+        lsp_fallback = false,
         async = false,
         timeout_ms = 1000,
+      },
+
+      formatters = {
+        prettier = {
+          prepend_args = {
+            '--print-width',
+            '200', -- 👈 max line length
+            '--prose-wrap',
+            'always', -- 👈 wrap markdown text
+            '--tab-width',
+            '4',
+            '--single-quote',
+          },
+        },
       },
     }
 
     vim.keymap.set({ 'n', 'v' }, '<leader>mp', function()
       conform.format {
-        lsp_fallback = true,
+        lsp_fallback = false,
         async = false,
         timeout_ms = 1000,
       }
