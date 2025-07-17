@@ -172,11 +172,8 @@ return {
           new_root_dir,
         }
       end,
-      on_attach = function(client, bufnr)
-        local function buf_set_option(...)
-          vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+      on_attach = function(_, bufnr)
+        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
       end,
       filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
       root_dir = lspconfig.util.root_pattern 'angular.json',
