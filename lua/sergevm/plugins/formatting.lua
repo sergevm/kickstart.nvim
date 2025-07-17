@@ -6,15 +6,15 @@ return {
 
     conform.setup {
       formatters_by_ft = {
-        -- javascript = { 'prettier' },
-        -- typescript = { 'prettier' },
-        -- javascriptreact = { 'prettier' },
-        -- typescriptreact = { 'prettier' },
-        -- svelte = { 'prettier' },
-        -- css = { 'prettier' },
-        -- html = { 'prettier' },
-        -- json = { 'prettier' },
-        -- yaml = { 'prettier' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        svelte = { 'prettier' },
+        css = { 'prettier' },
+        html = { 'prettier' },
+        json = { 'prettier' },
+        yaml = { 'prettier' },
         markdown = { 'prettier' },
         graphql = { 'prettier' },
         liquid = { 'prettier' },
@@ -30,15 +30,16 @@ return {
 
       formatters = {
         prettier = {
-          prepend_args = {
-            '--print-width',
-            '200', -- 👈 max line length
-            '--prose-wrap',
-            'always', -- 👈 wrap markdown text
-            '--tab-width',
-            '4',
-            '--single-quote',
-          },
+          -- -- Uncomment to customize Prettier options for all contexts. You should always use a .prettierrc file instead.
+          -- prepend_args = {
+          --   '--print-width',
+          --   '200', -- 👈 max line length
+          --   '--prose-wrap',
+          --   'always', -- 👈 wrap markdown text
+          --   '--tab-width',
+          --   '4',
+          --   '--single-quote',
+          -- },
         },
       },
     }
