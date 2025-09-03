@@ -25,8 +25,7 @@ require('lazy').setup {
   spec = {
     -- import your plugins
     { import = 'plugins' },
-    { import = 'sergevm.plugins' }, -- TODO: remove after restructuring
-    { import = 'sergevm.plugins.lsp' }, -- TODO: remove after restructuring
+    { import = 'plugins.lsp' }, -- TODO: remove after restructuring
   },
   rtp = {
     disabled_plugins = {
