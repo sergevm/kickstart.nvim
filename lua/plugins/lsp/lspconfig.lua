@@ -10,7 +10,7 @@ return {
     local lspconfig = require 'lspconfig'
 
     -- import mason_lspconfig plugin
-    local mason_lspconfig = require 'mason-lspconfig'
+    -- local mason_lspconfig = require 'mason-lspconfig'
 
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
@@ -78,16 +78,24 @@ return {
     local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
-    for type, icon in pairs(signs) do
-      local hl = 'DiagnosticSign' .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-    end
+    vim.diagnostic.config {
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.INFO] = '',
+          [vim.diagnostic.severity.HINT] = '',
+        },
+      },
+      virtual_text = false,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    }
 
     lspconfig['svelte'].setup {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
+      on_attach = function(client)
         vim.api.nvim_create_autocmd('BufWritePost', {
           pattern = { '*.js', '*.ts' },
           callback = function(ctx)
@@ -98,7 +106,7 @@ return {
       end,
     }
     -- You have to install PowerShellEditorServices manually: download and extract zip to .local/share/powershell
-    local mason_registry = require 'mason-registry'
+    -- local mason_registry = require 'mason-registry'
 
     -- lspconfig['powershell_es'].setup {
     --   bundle_path = mason_registry.get_package('powershell-editor-services').(),
