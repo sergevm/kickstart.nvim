@@ -3,26 +3,12 @@ return {
   event = 'VeryLazy', -- Or `LspAttach`
   priority = 1000, -- needs to be loaded in first
   config = function()
-    vim.diagnostic.config {
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '',
-          [vim.diagnostic.severity.WARN] = '',
-          [vim.diagnostic.severity.INFO] = '',
-          [vim.diagnostic.severity.HINT] = '',
-        },
-      },
-      virtual_text = false,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    }
     require('tiny-inline-diagnostic').setup {
       -- Style preset for diagnostic messages
       -- Available options:
       -- "modern", "classic", "minimal", "powerline",
       -- "ghost", "simple", "nonerdfont", "amongus"
-      preset = 'modern',
+      preset = 'amongus',
 
       transparent_bg = false, -- Set the background of the diagnostic to transparent
       transparent_cursorline = false, -- Set the background of the cursorline to transparent (only one the first diagnostic)
