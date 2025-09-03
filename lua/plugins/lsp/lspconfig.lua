@@ -6,16 +6,9 @@ return {
     { 'antosha417/nvim-lsp-file-operations', config = true },
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require 'lspconfig'
-
-    -- import mason_lspconfig plugin
-    -- local mason_lspconfig = require 'mason-lspconfig'
-
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim.keymap
 
     -- set up go lsp ...
     lspconfig.gopls.setup {
@@ -78,20 +71,20 @@ return {
     local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    vim.diagnostic.config {
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '',
-          [vim.diagnostic.severity.WARN] = '',
-          [vim.diagnostic.severity.INFO] = '',
-          [vim.diagnostic.severity.HINT] = '',
-        },
-      },
-      virtual_text = false,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    }
+    -- vim.diagnostic.config {
+    --   signs = {
+    --     text = {
+    --       [vim.diagnostic.severity.ERROR] = '',
+    --       [vim.diagnostic.severity.WARN] = '',
+    --       [vim.diagnostic.severity.INFO] = '',
+    --       [vim.diagnostic.severity.HINT] = '',
+    --     },
+    --   },
+    --   virtual_text = false,
+    --   underline = true,
+    --   update_in_insert = false,
+    --   severity_sort = true,
+    -- }
 
     lspconfig['svelte'].setup {
       capabilities = capabilities,
