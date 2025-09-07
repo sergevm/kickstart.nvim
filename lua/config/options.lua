@@ -9,6 +9,7 @@ opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the
 opt.sidescrolloff = 8 -- Minimal number of screen columns to keep to the left and right of the cursor if 'nowrap' is set.
 opt.wrap = false -- Disable line wrapping
 opt.spelllang = { 'en', 'nl' }
+vim.g.winborder = 'rounded'
 
 -- Tabs & indentation
 opt.tabstop = 2
