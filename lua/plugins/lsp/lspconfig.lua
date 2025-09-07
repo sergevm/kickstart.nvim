@@ -82,7 +82,7 @@ return {
         })
       end,
     }
-
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/powershell_es.lua
     lspconfig['powershell_es'].setup {
       capabilities = capabilities,
       bundle_path = vim.fn.stdpath 'data' .. '/mason/packages/powershell-editor-services',
