@@ -70,22 +70,6 @@ return {
 
     local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- vim.diagnostic.config {
-    --   signs = {
-    --     text = {
-    --       [vim.diagnostic.severity.ERROR] = '',
-    --       [vim.diagnostic.severity.WARN] = '',
-    --       [vim.diagnostic.severity.INFO] = '',
-    --       [vim.diagnostic.severity.HINT] = '',
-    --     },
-    --   },
-    --   virtual_text = false,
-    --   underline = true,
-    --   update_in_insert = false,
-    --   severity_sort = true,
-    -- }
-
     lspconfig['svelte'].setup {
       capabilities = capabilities,
       on_attach = function(client)
@@ -98,41 +82,12 @@ return {
         })
       end,
     }
-    -- You have to install PowerShellEditorServices manually: download and extract zip to .local/share/powershell
-    -- local mason_registry = require 'mason-registry'
 
-    -- lspconfig['powershell_es'].setup {
-    --   bundle_path = mason_registry.get_package('powershell-editor-services').(),
-    --   cmd = {
-    --     'pwsh',
-    --     '-NoLogo',
-    --     '-NoProfile',
-    --     '-Command',
-    --     vim.fn.expand '~/.local/share/nvim/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1',
-    --     '-HostName',
-    --     'nvim',
-    --     '-Stdio',
-    --     '-HostProfileId',
-    --     '0',
-    --     '-HostVersion',
-    --     '1.0.0',
-    --     '-LogPath',
-    --     vim.fn.stdpath 'cache' .. '/powershell_es.log',
-    --     '-SessionDetailsPath',
-    --     vim.fn.stdpath 'cache' .. '/powershell_es.session.json',
-    --     '-BundledModulesPath',
-    --     vim.fn.expand '~/.local/share/powershell/Modules',
-    --     '-LogLevel',
-    --     'Normal',
-    --     '-FeatureFlags',
-    --     '@()',
-    --   },
-    --   filetypes = { 'ps1', 'powershell' },
-    --   shell = 'pwsh',
-    --   init_options = {
-    --     enableProfileLoading = false,
-    --   },
-    -- }
+    lspconfig['powershell_es'].setup {
+      capabilities = capabilities,
+      bundle_path = vim.fn.stdpath 'data' .. '/mason/packages/powershell-editor-services',
+      stdio = true,
+    }
     lspconfig['graphql'].setup {
       capabilities = capabilities,
       filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },
