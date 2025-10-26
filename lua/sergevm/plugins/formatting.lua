@@ -21,6 +21,7 @@ return {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
         go = { 'gofmt' },
+        swift = { 'swift_format' },
       },
       format_on_save = {
         lsp_fallback = false,
