@@ -19,7 +19,7 @@ return {
         auto_trigger = true,
         debounce = 75,
         keymap = {
-          accept = '<C-j>',
+          accept = '<Tab>',
           next = '<C-n>',
           prev = '<C-p>',
           dismiss = '<C-c>',
