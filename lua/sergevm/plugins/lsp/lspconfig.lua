@@ -2,6 +2,8 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
     'hrsh7th/cmp-nvim-lsp',
     { 'antosha417/nvim-lsp-file-operations', config = true },
   },
@@ -16,18 +18,6 @@ return {
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
     local keymap = vim.keymap -- for conciseness
-
-    -- set up go lsp ...
-    lspconfig.gopls.setup {
-      settings = {
-        gopls = {
-          analyses = {
-            unusedparams = true,
-          },
-          staticcheck = true,
-        },
-      },
-    }
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -84,6 +74,27 @@ return {
       local hl = 'DiagnosticSign' .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
     end
+
+    lspconfig.gopls.setup {
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+        },
+      },
+    }
+
+    lspconfig.sourcekit.setup {
+      capabilities = {
+        workspace = {
+          didChangeWatchedFiles = {
+            dynamicRegistration = true,
+          },
+        },
+      },
+    }
 
     lspconfig['svelte'].setup {
       capabilities = capabilities,
@@ -196,5 +207,10 @@ return {
         },
       },
     }
+    -- csharp lsp setup
+    lspconfig.csharp_ls.setup {}
+
+    -- Bicep Language Server setup
+    lspconfig.bicep.setup {}
   end,
 }
