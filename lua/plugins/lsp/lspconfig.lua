@@ -6,16 +6,9 @@ return {
     { 'antosha417/nvim-lsp-file-operations', config = true },
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require 'lspconfig'
-
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require 'mason-lspconfig'
-
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim.keymap
 
     -- set up go lsp ...
     lspconfig.gopls.setup {
@@ -77,17 +70,9 @@ return {
 
     local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
-    for type, icon in pairs(signs) do
-      local hl = 'DiagnosticSign' .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-    end
-
     lspconfig['svelte'].setup {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
+      on_attach = function(client)
         vim.api.nvim_create_autocmd('BufWritePost', {
           pattern = { '*.js', '*.ts' },
           callback = function(ctx)
@@ -97,41 +82,12 @@ return {
         })
       end,
     }
-    -- You have to install PowerShellEditorServices manually: download and extract zip to .local/share/powershell
-    local mason_registry = require 'mason-registry'
-
-    -- lspconfig['powershell_es'].setup {
-    --   bundle_path = mason_registry.get_package('powershell-editor-services').(),
-    --   cmd = {
-    --     'pwsh',
-    --     '-NoLogo',
-    --     '-NoProfile',
-    --     '-Command',
-    --     vim.fn.expand '~/.local/share/nvim/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1',
-    --     '-HostName',
-    --     'nvim',
-    --     '-Stdio',
-    --     '-HostProfileId',
-    --     '0',
-    --     '-HostVersion',
-    --     '1.0.0',
-    --     '-LogPath',
-    --     vim.fn.stdpath 'cache' .. '/powershell_es.log',
-    --     '-SessionDetailsPath',
-    --     vim.fn.stdpath 'cache' .. '/powershell_es.session.json',
-    --     '-BundledModulesPath',
-    --     vim.fn.expand '~/.local/share/powershell/Modules',
-    --     '-LogLevel',
-    --     'Normal',
-    --     '-FeatureFlags',
-    --     '@()',
-    --   },
-    --   filetypes = { 'ps1', 'powershell' },
-    --   shell = 'pwsh',
-    --   init_options = {
-    --     enableProfileLoading = false,
-    --   },
-    -- }
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/powershell_es.lua
+    lspconfig['powershell_es'].setup {
+      capabilities = capabilities,
+      bundle_path = vim.fn.stdpath 'data' .. '/mason/packages/powershell-editor-services',
+      stdio = true,
+    }
     lspconfig['graphql'].setup {
       capabilities = capabilities,
       filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },

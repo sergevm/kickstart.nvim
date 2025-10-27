@@ -14,14 +14,24 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
--- Disable virtual text for diagnostics, because replacing it with tiny-inline-diagnostic.nvim
-vim.diagnostic.config { virtual_text = false }
+
+require 'config.globals'
+require 'config.options'
+require 'config.keymaps'
+require 'config.autocmds'
+
 -- Load lazy.nvim
 require('lazy').setup {
   spec = {
     -- import your plugins
-    { import = 'sergevm.plugins' },
-    { import = 'sergevm.plugins.lsp' },
+    { import = 'plugins' },
+    { import = 'plugins.lsp' }, -- TODO: remove after restructuring
+  },
+  rtp = {
+    disabled_plugins = {
+      'netrw',
+      'netrwPlugin',
+    },
   },
   -- automatically check for plugin updates
   change_detection = { notify = false },

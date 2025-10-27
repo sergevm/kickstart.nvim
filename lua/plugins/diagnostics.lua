@@ -13,6 +13,7 @@ return {
       transparent_bg = false, -- Set the background of the diagnostic to transparent
       transparent_cursorline = false, -- Set the background of the cursorline to transparent (only one the first diagnostic)
 
+      -- Change the Diagnostic symbols in the sign column (gutter)
       hi = {
         error = 'DiagnosticError', -- Highlight group for error messages
         warn = 'DiagnosticWarn', -- Highlight group for warning messages
