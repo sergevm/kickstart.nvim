@@ -14,8 +14,10 @@ return {
   config = function()
     require('copilot').setup {
 
+      copilot_node_command = vim.fn.expand '$HOME' .. '/.nvm/versions/node/v24.1.0/bin/node', -- Node.js version must be > 22
+
       suggestion = {
-        enabled = true, -- set to false if you enable copilot-cmp.lua
+        enabled = false, -- set to false if you enable copilot-cmp.lua
         auto_trigger = true,
         debounce = 75,
         keymap = {
@@ -40,15 +42,7 @@ return {
       logger = logger,
 
       panel = {
-        enabled = false, -- set to false if you enable copilot-cmp.lua
-        auto_refresh = true,
-        keymap = {
-          accept = '<C-CR>',
-          jump_next = 'C-n',
-          jump_prev = 'C-p',
-          refresh = 'gr',
-          open = '<C-p>',
-        },
+        enabled = false,
       },
 
       should_attach = function(_, bufname)
