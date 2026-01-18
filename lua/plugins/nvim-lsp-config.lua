@@ -214,17 +214,23 @@ return { -- LSP Configuration & Plugins
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          
+          -- Use the new vim.lsp.config API instead of lspconfig
+          vim.lsp.config[server_name] = server
         end,
       },
     }
 
-    local lspconfig = require 'lspconfig'
-
     -- csharp lsp setup
-    lspconfig.csharp_ls.setup {}
+    vim.lsp.config.csharp_ls = {}
 
     -- Bicep Language Server setup
-    lspconfig.bicep.setup {}
+    vim.lsp.config.bicep = {}
+
+    -- Enable all configured LSP servers
+    local server_names = vim.tbl_keys(servers or {})
+    table.insert(server_names, 'csharp_ls')
+    table.insert(server_names, 'bicep')
+    vim.lsp.enable(server_names)
   end,
 }

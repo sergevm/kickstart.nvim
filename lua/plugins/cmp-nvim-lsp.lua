@@ -5,10 +5,9 @@ return {
     'neovim/nvim-lspconfig',
   },
   config = function()
-    local lspconfig = require 'lspconfig'
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    lspconfig.gopls.setup {
+    vim.lsp.config.gopls = vim.tbl_extend('force', vim.lsp.config.gopls or {}, {
       capabilities = capabilities,
-    }
+    })
   end,
 }
