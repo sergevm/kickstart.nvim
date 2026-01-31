@@ -14,6 +14,7 @@ return {
 
     local util = require 'lspconfig.util'
     local lspconfig = require 'lspconfig'
+    local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
     -- set up go lsp ...
     vim.lsp.config.gopls = {
@@ -73,20 +74,6 @@ return {
       end,
     })
 
-    local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
-
-    vim.lsp.config.svelte = {
-      capabilities = capabilities,
-      on_attach = function(client)
-        vim.api.nvim_create_autocmd('BufWritePost', {
-          pattern = { '*.js', '*.ts' },
-          callback = function(ctx)
-            -- Here use ctx.match instead of ctx.file
-            client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-          end,
-        })
-      end,
-    }
     -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/powershell_es.lua
     vim.lsp.config.powershell_es = {
       capabilities = capabilities,
@@ -103,10 +90,10 @@ return {
       capabilities = capabilities,
       filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },
     }
-    -- vim.lsp.config.emmet_ls = {
-    --   capabilities = capabilities,
-    --   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
-    -- }
+    vim.lsp.config.emmet_ls = {
+      capabilities = capabilities,
+      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
+    }
     vim.lsp.config.lua_ls = {
       capabilities = capabilities,
       settings = {
