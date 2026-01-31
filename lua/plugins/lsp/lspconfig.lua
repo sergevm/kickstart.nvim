@@ -12,6 +12,9 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
+    local util = require 'lspconfig.util'
+    local lspconfig = require 'lspconfig'
+
     -- set up go lsp ...
     vim.lsp.config.gopls = {
       cmd = { 'gopls' },
@@ -100,10 +103,10 @@ return {
       capabilities = capabilities,
       filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },
     }
-    vim.lsp.config.emmet_ls = {
-      capabilities = capabilities,
-      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
-    }
+    -- vim.lsp.config.emmet_ls = {
+    --   capabilities = capabilities,
+    --   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
+    -- }
     vim.lsp.config.lua_ls = {
       capabilities = capabilities,
       settings = {
@@ -118,25 +121,23 @@ return {
         },
       },
     }
-    vim.lsp.config.angularls = {
-      cmd = { 'ngserver', '--stdio' },
-      on_new_config = function(new_config, new_root_dir)
-        new_config.cmd = {
-          'ngserver',
-          '--stdio',
-          '--tsProbeLocations',
-          new_root_dir,
-          '--ngProbeLocations',
-          new_root_dir,
-        }
-      end,
+    lspconfig.angularls = {
+      cmd = {
+        vim.fn.stdpath 'data' .. '/mason/packages/angular-language-server/node_modules/.bin/ngserver',
+        '--stdio',
+        '--tsProbeLocations',
+        vim.fn.getcwd(),
+        '--ngProbeLocations',
+        vim.fn.getcwd(),
+      },
       on_attach = function(_, bufnr)
         vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
       end,
       filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
-      root_markers = { 'angular.json' },
+      root_dir = util.root_pattern('angular.json', '.git'),
       flags = {
         debounce_text_changes = 150,
+        exit_timeout = 500,
       },
     }
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bicep

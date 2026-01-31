@@ -38,7 +38,7 @@ return {
         'emmet_ls',
         'bicep',
         'azure_pipelines_ls',
-        'angularls@18.2.13', -- This needs adaptation based on the typescript version in your project
+        'angularls@19.2.0', -- This needs adaptation based on the typescript version in your project
         'gopls',
         'powershell_es',
       },
