@@ -1,7 +1,6 @@
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
   dependencies = {
-    { 'github/copilot.vim' }, -- Required
     { 'nvim-lua/plenary.nvim' }, -- Required
   },
   opts = {

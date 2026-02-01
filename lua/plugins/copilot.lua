@@ -6,6 +6,22 @@ local logger = {
   trace_lsp_progress = false,
   log_lsp_messages = false,
 }
+
+-- Dynamically detect node command (respects current nvm version)
+local function get_node_command()
+  local nvm_bin = os.getenv 'NVM_BIN'
+  if nvm_bin and vim.fn.executable(nvm_bin .. '/node') == 1 then
+    return nvm_bin .. '/node'
+  end
+  -- Fallback: use which node
+  local node_path = vim.fn.system('which node'):gsub('\n', '')
+  if vim.fn.executable(node_path) == 1 then
+    return node_path
+  end
+  -- Last resort: use plain node
+  return 'node'
+end
+
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',
@@ -14,7 +30,7 @@ return {
   config = function()
     require('copilot').setup {
 
-      copilot_node_command = vim.fn.expand '$HOME' .. '/.nvm/versions/node/v24.1.0/bin/node', -- Node.js version must be > 22
+      copilot_node_command = get_node_command(), -- Node.js version must be > 22
 
       suggestion = {
         enabled = false, -- set to false if you enable copilot-cmp.lua

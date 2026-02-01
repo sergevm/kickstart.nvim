@@ -9,12 +9,12 @@ return {
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
     local keymap = vim.keymap
 
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+     -- used to enable autocompletion (assign to every lsp server config)
+     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    local util = require 'lspconfig.util'
-    local lspconfig = require 'lspconfig'
-    local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
+     local util = require 'lspconfig.util'
+     local lspconfig = require 'lspconfig'
+     local bicep_lsp_bin = '/usr/local/bin/bicep-langserver/Bicep.LangServer.dll'
 
     -- set up go lsp ...
     vim.lsp.config.gopls = {
@@ -105,51 +105,51 @@ return {
           completion = {
             callSnippet = 'Replace',
           },
-        },
-      },
-    }
-    lspconfig.angularls = {
-      cmd = {
-        vim.fn.stdpath 'data' .. '/mason/packages/angular-language-server/node_modules/.bin/ngserver',
-        '--stdio',
-        '--tsProbeLocations',
-        vim.fn.getcwd(),
-        '--ngProbeLocations',
-        vim.fn.getcwd(),
-      },
-      on_attach = function(_, bufnr)
-        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-      end,
-      filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
-      root_dir = util.root_pattern('angular.json', '.git'),
-      flags = {
-        debounce_text_changes = 150,
-        exit_timeout = 500,
-      },
-    }
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bicep
-    -- https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
-    vim.lsp.config.bicep = {
-      cmd = { 'dotnet', bicep_lsp_bin },
-    }
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/azure_pipelines_ls.lua
-    vim.lsp.config.azure_pipelines_ls = {
-      root_markers = { 'azure-pipelines.yml', '.git' },
-      settings = {
-        yaml = {
-          schemas = {
-            ['https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json'] = {
-              '/azure-pipeline*.y*l',
-              '/*.azure*',
-              'Azure-Pipelines/**/*.y*l',
-              'Pipelines/*.y*l',
-            },
-          },
-        },
-      },
-    }
+         },
+       },
+     }
+     lspconfig.angularls = {
+       cmd = {
+         vim.fn.stdpath 'data' .. '/mason/packages/angular-language-server/node_modules/.bin/ngserver',
+         '--stdio',
+         '--tsProbeLocations',
+         vim.fn.getcwd(),
+         '--ngProbeLocations',
+         vim.fn.getcwd(),
+       },
+       on_attach = function(_, bufnr)
+         vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+       end,
+       filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+       root_dir = util.root_pattern('angular.json', '.git'),
+       flags = {
+         debounce_text_changes = 150,
+         exit_timeout = 500,
+       },
+     }
+     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bicep
+     -- https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install
+     vim.lsp.config.bicep = {
+       cmd = { 'dotnet', bicep_lsp_bin },
+     }
+     -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/azure_pipelines_ls.lua
+     vim.lsp.config.azure_pipelines_ls = {
+       root_markers = { 'azure-pipelines.yml', '.git' },
+       settings = {
+         yaml = {
+           schemas = {
+             ['https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json'] = {
+               '/azure-pipeline*.y*l',
+               '/*.azure*',
+               'Azure-Pipelines/**/*.y*l',
+               'Pipelines/*.y*l',
+             },
+           },
+         },
+       },
+     }
 
-    -- Enable LSP servers
-    vim.lsp.enable { 'gopls', 'svelte', 'powershell_es', 'graphql', 'emmet_ls', 'lua_ls', 'angularls', 'bicep', 'azure_pipelines_ls' }
+     -- Enable LSP servers
+     vim.lsp.enable { 'gopls', 'svelte', 'powershell_es', 'graphql', 'emmet_ls', 'lua_ls', 'angularls', 'bicep', 'azure_pipelines_ls' }
   end,
 }
