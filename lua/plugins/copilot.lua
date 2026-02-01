@@ -64,7 +64,7 @@ return {
       should_attach = function(bufnr, bufname)
         -- disable for large files
         local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-        if ok and stats and stats.size > 1024 * 1024 then -- 1MB
+        if ok and stats and stats.size > vim.g.MAX_FILE_SIZE then
           return false
         end
 

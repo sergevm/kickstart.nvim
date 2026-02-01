@@ -40,7 +40,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
       -- Use synchronous fs_stat to get file size
       local stat = vim.loop.fs_stat(filepath)
-      if stat and stat.size > 1000000 then
+      if stat and stat.size > vim.g.MAX_FILE_SIZE then
         return
       end
 

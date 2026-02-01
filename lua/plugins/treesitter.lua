@@ -10,10 +10,9 @@ return {
     local treesitter = require 'nvim-treesitter.configs'
 
     local disable_large_file_features = function(buf)
-      local max_filesize = 1024 * 1024 * 3
       local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
 
-      if size > max_filesize then
+      if size > vim.g.LARGE_FILE_SIZE then
         vim.b[buf].large_file = true
         vim.cmd 'syntax off'
         vim.cmd 'filetype off'

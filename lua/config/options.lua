@@ -48,9 +48,6 @@ opt.formatoptions:remove 'o' -- Don't auto-insert new lines
 opt.autoread = true -- Auto-read files when changed outside of Neovim
 opt.autowrite = false -- Auto-write files when leaving a buffer
 
--- Disable virtual text for diagnostics, because replacing it with tiny-inline-diagnostic.nvim
-vim.diagnostic.config { virtual_text = false }
-
 opt.mouse = 'a'
 opt.background = 'dark'
 opt.clipboard:append 'unnamedplus'
